@@ -30,8 +30,14 @@ function getNote(titleInput,noteInput){
   const note = noteInput.value
   if (title.trim() !== '' && note.trim() !== '') {
     const noteHtml = `
-      <div class="note">
+      <div class="note js-note-${title}" data-note-id="${title}">
+       <div class="head">
         <h2 class="title">${title}</h2>
+        <div>
+          <button class="deleteBtn" data-note-id="${title}">X</button>
+          <button class="editBtn">edit</button>
+        </div>
+       </div>
         <p class="note-body">${note}</p>
         <a href="#">Read More</a>
       </div>
@@ -44,9 +50,30 @@ function getNote(titleInput,noteInput){
     mainContainer.innerHTML += noteHtml;
 
     SaveToStorage(mainContainer.innerHTML);
+    DeleteNote(mainContainer)
+  
   }
+  
+  
 }
+
 
 function SaveToStorage(notesHtml){
   localStorage.setItem('note',notesHtml)
+}
+
+
+function DeleteNote(mainContainer){
+document.querySelectorAll('.deleteBtn')
+  .forEach((btn)=>{
+    
+    btn.addEventListener('click',()=>{
+      const title = btn.dataset.noteId;
+      const noteContainer =document.querySelector(`.js-note-${title}`);
+      mainContainer.remove(noteContainer);
+      SaveToStorage(mainContainer.innerHTML)
+      console.log(noteContainer)
+    });
+  });
+ 
 }
