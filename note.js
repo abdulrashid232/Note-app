@@ -26,20 +26,20 @@ submitBtn.addEventListener('click',()=>{
 function getNote(titleInput,noteInput) {
 
 
-  const title = titleInput.value;
-  const note = noteInput.value;
+  const title = titleInput.value.trim();
+  const note = noteInput.value.trim();
 
-  if (title.trim() !== '' && note.trim() !== '') {
+  if (title !== '' && note !== '') {
     const noteHtml = `
       <div class="note js-note" data-note-id="${title}">
         <div class="head">
-          <h2 class="title">${title}</h2>
+          <h2 class="title" data-note-title-id="${title}">${title}</h2>
           <div>
             <button class="deleteBtn" data-note-id="${title}">X</button>
             <button class="editBtn">edit</button>
           </div>
         </div>
-        <p class="note-body">${note}</p>
+        <p class="note-body" data-note-id="${title}">${note}</p>
         <a href="#">Read More</a>
       </div>
     `;
@@ -52,6 +52,7 @@ function getNote(titleInput,noteInput) {
 
     SaveToStorage(mainContainer.innerHTML);
     DeleteNote();
+    EditNote();
   }
 }
 
@@ -66,6 +67,25 @@ function DeleteNote() {
       const noteContainer = document.querySelector(`[data-note-id="${title}"]`);
       noteContainer.remove();
       SaveToStorage(document.querySelector('.js-note-area').innerHTML);
+    });
+  });
+}
+
+function EditNote(){
+  document.querySelectorAll('.editBtn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const title = btn.dataset.noteId;
+      const noteTitle = document.querySelector(`[data-note-title-id="${title}"]`);
+      const titleInput = document.querySelector('.inputForTitle');
+      const noteInput = document.querySelector('.inputForNote');
+      const newTitle = titleInput.value.trim();
+      const note = noteInput.value.trim();
+      console.log(newTitle);
+      // console.log(noteTitle.textContent);
+      inputNote.classList.add('show');
+      addNoteBtn.classList.add('notShow');
+      noteArea.classList.add('notShow');
+      // SaveToStorage(document.querySelector('.js-note-area').innerHTML);
     });
   });
 }
