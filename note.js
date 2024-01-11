@@ -1,22 +1,20 @@
-
 const addNoteBtn = document.querySelector('.js-add-note');
 const inputNote = document.querySelector('.inputs');
 const submitBtn = document.querySelector('.submitbtn');
 const saveEditBtn = document.querySelector('.saveEdit');
 const noteArea = document.querySelector('.js-note-area');
 
-
 noteArea.innerHTML = localStorage.getItem('note');
 DeleteNote();
 EditNote();
-addNoteBtn.addEventListener('click',()=>{
+addNoteBtn.addEventListener('click', () => {
   inputNote.classList.add('show');
   addNoteBtn.classList.add('notShow');
   noteArea.classList.add('notShow');
   saveEditBtn.classList.add('notShow');
 });
 
-submitBtn.addEventListener('click',()=>{
+submitBtn.addEventListener('click', () => {
   const titleInput = document.querySelector('.inputForTitle');
   const noteInput = document.querySelector('.inputForNote');
 
@@ -26,9 +24,7 @@ submitBtn.addEventListener('click',()=>{
   noteArea.classList.toggle('notShow');
 });
 
-function getNote(titleInput,noteInput) {
-
-
+function getNote(titleInput, noteInput) {
   const title = titleInput.value.trim();
   const note = noteInput.value.trim();
 
@@ -74,17 +70,14 @@ function DeleteNote() {
   });
 }
 
-function EditNote(){
+function EditNote() {
   document.querySelectorAll('.editBtn').forEach((btn) => {
     btn.addEventListener('click', () => {
       const title = btn.dataset.noteId;
       const noteTitle = document.querySelector(`.js-title-${title}`);
       const noteBody = document.querySelector(`.js-noteBody-${title}`);
-     
+      const noteContainer = document.querySelector(`.js-note-${title}`);
 
-
-      console.log(noteTitle.textContent);
-      console.log(noteBody.textContent);
       const titleInput = document.querySelector('.inputForTitle');
       const noteInput = document.querySelector('.inputForNote');
       titleInput.value = noteTitle.textContent;
@@ -94,13 +87,40 @@ function EditNote(){
       addNoteBtn.classList.add('notShow');
       noteArea.classList.add('notShow');
       submitBtn.classList.add('notShow');
-      saveEditBtn.classList.add('show');
-      saveEditBtn.addEventListener('click', ()=>{
-        getNote(titleInput, noteInput);
-      })
+      saveEditBtn.classList.remove('notShow');
+
+    saveEditBtn.addEventListener('click', () => {
+      const newTitle = titleInput.value.trim();
+      const newNote = noteInput.value.trim();
+
+      const updatedNoteHtml = `
+        <div class="note js-note-${newTitle}" data-note-id="${newTitle}">
+          <div class="head">
+            <h2 class="title js-title-${newTitle}">${newTitle}</h2>
+            <div>
+              <button class="deleteBtn" data-note-id="${newTitle}">X</button>
+              <button class="editBtn" data-note-id="${newTitle}">edit</button>
+            </div>
+          </div>
+          <p class="note-body js-noteBody-${newTitle}">${newNote}</p>
+          <a href="#">Read More</a>
+        </div>
+      `;
+
+
+      noteContainer.outerHTML = updatedNoteHtml;
+
+      inputNote.classList.toggle('show');
+      addNoteBtn.classList.toggle('notShow');
+      noteArea.classList.toggle('notShow');
+      submitBtn.classList.remove('notShow');
 
       
+      SaveToStorage(document.querySelector('.js-note-area').innerHTML);
+      DeleteNote();
+      EditNote();
+    });
+
     });
   });
 }
-
