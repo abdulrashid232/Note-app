@@ -8,9 +8,19 @@ body{
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
 }
 .container{
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .inputs{
@@ -21,7 +31,7 @@ body{
 input{
   width: 100%;
   height: 2rem;
-  border: 0.5px solid gray;
+  border: 1px solid #ccc;
 
 }
 input::placeholder{
@@ -30,7 +40,7 @@ input::placeholder{
 
 textarea{
   margin-top: 2rem;
-  border: 0.5px solid gray;
+  border: 1px solid #ccc;
 }
 textarea::placeholder{
   font-size: 20px;
@@ -43,10 +53,11 @@ textarea::placeholder{
   width: 100%;
   height: 7rem;
   margin-top: 2rem;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding-left: 1rem;
-  padding-right: 1rem; 
+  background-color: #f0f0f0;
+  /* border-radius: 10px; */
+  padding: 10px;
+  /* margin-bottom: 10px; */
+  border-radius: 4px;
 }
 .head{
   display: flex;
@@ -64,4 +75,12 @@ textarea::placeholder{
 }
 .title{
   text-transform: capitalize;
+}
+button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
 }
