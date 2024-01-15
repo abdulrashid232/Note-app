@@ -109,6 +109,8 @@ function EditNote() {
 
 
       noteContainer.outerHTML = updatedNoteHtml;
+      titleInput.value = '';
+      noteInput.value = '';
 
       inputNote.classList.toggle('show');
       addNoteBtn.classList.toggle('notShow');
