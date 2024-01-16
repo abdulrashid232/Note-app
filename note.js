@@ -4,6 +4,7 @@ const submitBtn = document.querySelector('.submitbtn');
 const saveEditBtn = document.querySelector('.saveEdit');
 const noteArea = document.querySelector('.js-note-area');
 
+
 noteArea.innerHTML = localStorage.getItem('note');
 DeleteNote();
 EditNote();
@@ -39,7 +40,7 @@ function getNote(titleInput, noteInput) {
           </div>
         </div>
         <p class="note-body js-noteBody-${title}">${note}</p>
-        <a href="#">Read More</a>
+        <a href="#" class="readMore js-readMore-${title}" >Read More</a>
       </div>
     `;
 
@@ -52,6 +53,7 @@ function getNote(titleInput, noteInput) {
     SaveToStorage(mainContainer.innerHTML);
     DeleteNote();
     EditNote();
+    ReadMore();
   }
 }
 
@@ -103,7 +105,7 @@ function EditNote() {
             </div>
           </div>
           <p class="note-body js-noteBody-${newTitle}">${newNote}</p>
-          <a href="#">Read More</a>
+          <a href="#" class="readMore js-readMore-${newTitle}>Read More</a>
         </div>
       `;
 
@@ -121,8 +123,18 @@ function EditNote() {
       SaveToStorage(document.querySelector('.js-note-area').innerHTML);
       DeleteNote();
       EditNote();
+      ReadMore();
     });
 
     });
   });
+}
+
+function ReadMore(){
+  document.querySelectorAll('.readMore').forEach((btn)=>{
+    btn.addEventListener('click', ()=>{
+      const readContainer = document.querySelector('.readMore-container');
+      readContainer.style.display = "block"
+    })
+  })
 }
