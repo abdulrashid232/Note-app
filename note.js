@@ -145,6 +145,12 @@ function ReadMore(){
       const readNote = document.querySelector('.js-readNote');
       readTitle.textContent = noteTitle.textContent;
       readNote.textContent = noteBody.textContent;
+
+      document.querySelector('.closeBtn')
+        .addEventListener('click',()=>{
+          readContainer.style.display = "none";
+        })
+
       
     });
   });
