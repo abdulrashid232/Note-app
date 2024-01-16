@@ -5,9 +5,11 @@ const saveEditBtn = document.querySelector('.saveEdit');
 const noteArea = document.querySelector('.js-note-area');
 
 
+
 noteArea.innerHTML = localStorage.getItem('note');
 DeleteNote();
 EditNote();
+ReadMore();
 addNoteBtn.addEventListener('click', () => {
   inputNote.classList.add('show');
   addNoteBtn.classList.add('notShow');
@@ -40,7 +42,7 @@ function getNote(titleInput, noteInput) {
           </div>
         </div>
         <p class="note-body js-noteBody-${title}">${note}</p>
-        <a href="#" class="readMore js-readMore-${title}" >Read More</a>
+        <a href="#" class="readMore js-readMore-${title}" data-note-id="${title}">Read More</a>
       </div>
     `;
 
@@ -105,7 +107,7 @@ function EditNote() {
             </div>
           </div>
           <p class="note-body js-noteBody-${newTitle}">${newNote}</p>
-          <a href="#" class="readMore js-readMore-${newTitle}>Read More</a>
+          <a href="#" class="readMore js-readMore-${newTitle}" data-note-id="${newTitle}">Read More</a>
         </div>
       `;
 
@@ -134,7 +136,16 @@ function ReadMore(){
   document.querySelectorAll('.readMore').forEach((btn)=>{
     btn.addEventListener('click', ()=>{
       const readContainer = document.querySelector('.readMore-container');
-      readContainer.style.display = "block"
-    })
-  })
+      readContainer.style.display = "block";
+      const title = btn.dataset.noteId;
+      const noteTitle = document.querySelector(`.js-title-${title}`);
+      const noteBody = document.querySelector(`.js-noteBody-${title}`);
+
+      const readTitle = document.querySelector('.js-readTitle');
+      const readNote = document.querySelector('.js-readNote');
+      readTitle.textContent = noteTitle.textContent;
+      readNote.textContent = noteBody.textContent;
+      
+    });
+  });
 }
