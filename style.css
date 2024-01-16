@@ -85,6 +85,9 @@ button {
   cursor: pointer;
   border-radius: 4px;
 }
+.deleteBtn,.closeBtn{
+  background-color: red;
+}
 .readMore-container{
   position: absolute;
   display: none;

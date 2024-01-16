@@ -37,8 +37,8 @@ function getNote(titleInput, noteInput) {
         <div class="head">
           <h2 class="title js-title-${title}">${title}</h2>
           <div>
-            <button class="deleteBtn" data-note-id="${title}">X</button>
             <button class="editBtn" data-note-id="${title}">edit</button>
+            <button class="deleteBtn" data-note-id="${title}">X</button>
           </div>
         </div>
         <p class="note-body js-noteBody-${title}">${note}</p>
@@ -102,8 +102,8 @@ function EditNote() {
           <div class="head">
             <h2 class="title js-title-${newTitle}">${newTitle}</h2>
             <div>
-              <button class="deleteBtn" data-note-id="${newTitle}">X</button>
               <button class="editBtn" data-note-id="${newTitle}">edit</button>
+              <button class="deleteBtn" data-note-id="${newTitle}">X</button>
             </div>
           </div>
           <p class="note-body js-noteBody-${newTitle}">${newNote}</p>
