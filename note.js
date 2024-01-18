@@ -33,7 +33,7 @@ function getNote(titleInput, noteInput) {
   const note = noteInput.value.trim();
 
   if (title !== '' && note !== '') {
-    const noteHtml = `
+    let noteHtml = `
       <div class="note js-note-${title}" data-note-id="${title}">
         <div class="head">
           <h2 class="title js-title-${title}">${displayTitle}</h2>
@@ -42,10 +42,13 @@ function getNote(titleInput, noteInput) {
             <button class="deleteBtn" data-note-id="${title}">X</button>
           </div>
         </div>
-        <p class="note-body js-noteBody-${title}">${note}</p>
-        <a href="#" class="readMore js-readMore-${title}" data-note-id="${title}">Read More</a>
-      </div>
-    `;
+        <p class="note-body js-noteBody-${title}">${note}</p>`;
+    if (note.length > 50) {
+      noteHtml += `<a href="#" class="readMore js-readMore-${title}" data-note-id="${title}">Read More</a>`;
+    }
+
+    noteHtml += `</div>`;
+    
 
     titleInput.value = '';
     noteInput.value = '';
@@ -99,7 +102,7 @@ function EditNote() {
       const displayTitle = newTitle.replace(/-/g,' ');
       const newNote = noteInput.value.trim();
 
-      const updatedNoteHtml = `
+      let updatedNoteHtml = `
         <div class="note js-note-${newTitle}" data-note-id="${newTitle}">
           <div class="head">
             <h2 class="title js-title-${newTitle}">${displayTitle}</h2>
@@ -108,10 +111,13 @@ function EditNote() {
               <button class="deleteBtn" data-note-id="${newTitle}">X</button>
             </div>
           </div>
-          <p class="note-body js-noteBody-${newTitle}">${newNote}</p>
-          <a href="#" class="readMore js-readMore-${newTitle}" data-note-id="${newTitle}">Read More</a>
-        </div>
-      `;
+          <p class="note-body js-noteBody-${newTitle}">${newNote}</p>`;
+          if (newNote.length > 50) {
+            updatedNoteHtml += `<a href="#" class="readMore js-readMore-${title}" data-note-id="${title}">Read More</a>`;
+          }
+      
+          updatedNoteHtml += `</div>`;
+      
 
 
       noteContainer.outerHTML = updatedNoteHtml;
