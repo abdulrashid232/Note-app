@@ -28,14 +28,15 @@ submitBtn.addEventListener('click', () => {
 });
 
 function getNote(titleInput, noteInput) {
-  const title = titleInput.value.trim();
+  const title = titleInput.value.trim().replace(/\s+/g, '-');
+  const displayTitle = title.replace(/-/g,' ');
   const note = noteInput.value.trim();
 
   if (title !== '' && note !== '') {
     const noteHtml = `
       <div class="note js-note-${title}" data-note-id="${title}">
         <div class="head">
-          <h2 class="title js-title-${title}">${title}</h2>
+          <h2 class="title js-title-${title}">${displayTitle}</h2>
           <div>
             <button class="editBtn" data-note-id="${title}">edit</button>
             <button class="deleteBtn" data-note-id="${title}">X</button>
@@ -94,13 +95,14 @@ function EditNote() {
       saveEditBtn.classList.remove('notShow');
 
     saveEditBtn.addEventListener('click', () => {
-      const newTitle = titleInput.value.trim();
+      const newTitle = titleInput.value.trim().replace(/\s+/g, '-');
+      const displayTitle = newTitle.replace(/-/g,' ');
       const newNote = noteInput.value.trim();
 
       const updatedNoteHtml = `
         <div class="note js-note-${newTitle}" data-note-id="${newTitle}">
           <div class="head">
-            <h2 class="title js-title-${newTitle}">${newTitle}</h2>
+            <h2 class="title js-title-${newTitle}">${displayTitle}</h2>
             <div>
               <button class="editBtn" data-note-id="${newTitle}">edit</button>
               <button class="deleteBtn" data-note-id="${newTitle}">X</button>
