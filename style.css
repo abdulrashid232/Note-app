@@ -117,4 +117,51 @@ button {
   justify-content: space-between;
   margin-bottom: 20px;
 }
+/* Default styles for larger screens */
+.container {
+  max-width: 600px;
+}
+
+.inputs {
+  width: 530px;
+}
+
+/* Media query for tablets */
+@media (max-width: 768px) {
+  .container {
+    max-width: 80%;
+  }
+
+  .inputs {
+    width: 100%;
+  }
+}
+
+/* Media query for mobile devices */
+@media (max-width: 480px) {
+  .container {
+    max-width: 100%;
+    margin: 20px;
+    padding: 10px;
+  }
+
+  .inputs {
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .noteArea,
+  .note {
+    width: 100%;
+  }
+  
+  .inputForTitle,
+  textarea {
+    width: calc(100% - 20px);
+  }
+
+  .read-container {
+    width: calc(100% - 40px);
+  }
+}
 
